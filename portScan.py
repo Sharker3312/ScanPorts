@@ -10,9 +10,6 @@ def clear():
         os.system("cls")
     else:
         os.system("clear")    
-        
-
-    
 
 def check_port( *host_port, timeout=DEFAULT_TIMEOUT):
        
@@ -21,8 +18,7 @@ def check_port( *host_port, timeout=DEFAULT_TIMEOUT):
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     
     connected = sock.connect_ex(host_port) 
-    
-    
+
     if (connected==0):
         return connected
         sock.close()
@@ -38,11 +34,14 @@ def menu():
     
     lista_ports=[]
     cant_ports=0
-    
-   
-    ip_adress=sys.argv[1] 
-    ip=socket.gethostbyname(ip_adress)
-    
+
+    ip_adress=sys.argv[1]
+    try:
+        ip=socket.gethostbyname(ip_adress)
+    except:
+        print("Revise si la ip es correcta")
+        sys.exit(1)
+
     try:
         ip_validation=socket.inet_aton(ip)
         flag_validation=0
@@ -60,16 +59,14 @@ def menu():
         print("    made by Sharker3312")
         print("-" *50)
         print("Scanning Target: " + ip )
-        print("Scanning Target at: "+str(datetime.now()))
+        print("Scanning Target at: "+str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         print("-"*50)
-    
-    
 
         for port in range(1,81):
             porc=float(port / 81 ) *100
             porc=round(porc, 1)
             print(porc,"%",end="\r")
-            time.sleep(0.5)
+            time.sleep(0.1)
         
             imprimir= check_port(ip, port)
         
@@ -80,12 +77,7 @@ def menu():
         print("Open Ports ->",lista_ports) 
     if flag_validation==1:
         print("Incorrect ip adress, please verify")    
-                
-    
-  
-            
-    
-    
+
 if __name__== '__main__':
     failed_arguments()
     menu()    
