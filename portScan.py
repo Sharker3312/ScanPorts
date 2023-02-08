@@ -31,7 +31,7 @@ def check_port( *host_port, timeout=DEFAULT_TIMEOUT):
         
 def failed_arguments():
      if len(sys.argv) !=2:
-        print("\n[i] Uso: python3 " + "sys.argv[0]"+ " <ip_adress>\n" )
+        print("\n[i] Uso: python3 " + " <ip_adress>\n" )
         sys.exit(1)        
         
 def menu():
